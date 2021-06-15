@@ -4,20 +4,20 @@ require_once('../Logica/LNBusquedaEstadoFinanciero.php');
 $fechaInicio=$_POST['inicio'];
 $fechaFin=$_POST['fin'];
 $ci=$_POST['ci'];
-echo $_POST['Descarga'];
-if(isset($_POST['Descarga'])){
-$validador=$_POST['Descarga'];
-}else{
-    $validador=0;
-}
-echo $validador;
+//echo $_POST['Descarga'];
+//if(isset($_POST['Descarga'])){
+//$validador=$_POST['Descarga'];
+//}else{
+  //  $validador=0;
+//}
+//echo $validador;
 $objLNBABI=new LNBusquedaAsignacionBecaInstitucional();
 $objLNBEF=new LNBusquedaFinanciero();
 $datos=$objLNBABI->mes($fechaInicio,$fechaFin, $ci);
 $datosEstudiante=$objLNBABI->detalleEstudiante($ci);
 $idContrato=$objLNBEF->detalleEstudiante3($ci);
 $TiempoTotal=$objLNBABI->totalTime($fechaInicio,$fechaFin, $ci);
-//var_dump($idContrato);
+//var_dump($datosEstudiante);
 //echo "este es el id:".$idContrato['idContrato'];
 $GanadoDia;
 $dtz = new DateTimeZone("America/Caracas");
@@ -92,18 +92,19 @@ $dtz = new DateTimeZone("America/Caracas");
     <label for="datos">Total Ganado: </label> <?= $Ganancia;?><label for="datos">Bs.</label><br>
     <br>
     <?php 
-    if($validador=='0'){
+    //if($validador=='0'){
     ?>
     <form action="../Vista/EstadoCuenta.php" name="oculto" method="POST">
 <input type="hidden" value="<?php echo $idContrato['idContrato'];?>" name="idContrato" >
 <input type="hidden" value="<?php echo $fechaActual;?>" name="fecha" > 
 <input type="hidden" value="<?php echo $Ganancia;?>" name="ganancia" > 
+<input type="hidden" value="<?php echo $ci;?>" name="ci" > 
 <input type="submit" value="Descargar Saldo">
     <br>
     <?php
-    }else{
-        echo "Los datos ya fueron descargados";
-        }
+    //}else{
+      //  echo "Los datos ya fueron descargados";
+        //}
     ?>
     
     </table>

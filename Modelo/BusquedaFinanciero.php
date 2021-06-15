@@ -10,7 +10,7 @@
 		}
         public function saldoEstudiante($id){
             $sqlDetalle="
-            select CONCAT_WS(' ',e.apellidoPaterno,e.apellidoMaterno,e.primerNombre,e.segundoNombre)  as Estudiante, f.nombre facultad, c.nombre carrera, co.montoTotal CosteSemestre,  sc.montoPago pagado, sc.fechaPago fechaPagada, sc.tipoPago TipoPago, co.saldoTotal saldoTotal, e.ci ci
+            select CONCAT_WS(' ',e.apellidoPaterno,e.apellidoMaterno,e.primerNombre,e.segundoNombre)  as Estudiante, f.nombre facultad, c.nombre carrera, co.montoTotal CosteSemestre,  sc.montoPago pagado, sc.fechaPago fechaPagada, sc.tipoPago TipoPago, co.saldoTotal saldoTotal, e.ci ci, co.idcontrato idcontrato
             from facultad f
             INNER JOIN carrera c
             ON f.idFacultad=c.idFacultad
@@ -73,8 +73,8 @@
         }
         public function actualizarSaldo($SaldoUpdate, $id){
             $sqlUpdateSaldo="
-            UPDATE saldoContrato 
-            SET saldo=:saldoUpdate 
+            UPDATE contrato 
+            SET SaldoTotal=:saldoUpdate 
             WHERE idContrato=:id;
             ";
             $cmd = $this->conexion2->prepare($sqlUpdateSaldo);

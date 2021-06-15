@@ -4,7 +4,9 @@ require_once('../Logica/LNDescargaDatosFinanzas.php');
 $id=$_POST['idContrato'];
 $fechaActual=$_POST['fecha'];
 $Ganancia=$_POST['ganancia'];
+$ci=$_POST['ci'];
 $Descarga=1;
+//echo $ci;
 //$objLNBEF=new LNBusquedaFinanciero();
 //echo $datosPagoTotal['pagado'];
 //echo $Ganancia;
@@ -14,12 +16,22 @@ $Descarga=1;
 
 //$dtz = new DateTimeZone("America/Caracas");
         //$dt = new DateTime("now", $dtz);
-        
+
         //$fechaActual = $dt->format("Y-m-d");
         //echo $fechaActual;
 
 $objLNDEF=new LNDescargaFinanciero();
 $datosDescargo=$objLNDEF->Descargar($id,$fechaActual,$Ganancia);
+//var_dump($datosDescargo);
+$objLNBEF=new LNBusquedaFinanciero();
+$datosEstudiante=$objLNBEF->detalleEstudiante($ci);
+var_dump($datosEstudiante);
+$saldoOld=$datosEstudiante['saldoTotal'];
+$newSaldo=$saldoOld-$Ganancia;
+echo $newSaldo;
+$idContrato=$datosEstudiante['idcontrato'];
+//echo $idContrato;
+$SaldoUpdate=$objLNBEF->actualizarSaldo($newSaldo,$id);
 
 
 //echo "este es el id: ".$id;

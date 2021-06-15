@@ -12,6 +12,7 @@
             $sqlGanancia="
             INSERT INTO saldoContrato (idContrato,fechaPago,montoPago,tipoPago)
             VALUES(:id, :fechaActual, :ganancia, 'BecaConvenio');
+            
             ";
             $cmd = $this->conexion2->prepare($sqlGanancia);
             $cmd->bindParam(':id',$id);
