@@ -1,10 +1,10 @@
 <?php
  require_once('../Logica/LNBusquedaAsignacionBecaInstitucional.php');
- $idABI=$_GET['idABI'];
+ $ci=$_GET['ci'];
  $fecha=$_GET['fecha'];
  $objLNBABI=new LNBusquedaAsignacionBecaInstitucional();
-$datosdia=$objLNBABI->dia($idABI,$fecha);
-$datosEstudiante=$objLNBABI->detalleEstudiante($idABI);
+$datosdia=$objLNBABI->dia($ci,$fecha);
+$datosEstudiante=$objLNBABI->detalleEstudiante($ci);
 $fechaTraducida=$objLNBABI->fechaCastellano($fecha);
  //var_dump($datosdia);
 //echo "idABI: ".$idABI;

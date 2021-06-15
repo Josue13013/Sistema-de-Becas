@@ -7,7 +7,7 @@ class LNBusquedaFinanciero{
     {
         $this->objBusquedaFinanciero =  new BusquedaFinanciero();
     }
-    public function saldoEstudiante($id){
+    public function detalleEstudiante($id){
         return $this->objBusquedaFinanciero->saldoEstudiante($id);
     }
     public function detalleEstudiante2($id){

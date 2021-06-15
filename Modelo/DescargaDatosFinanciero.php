@@ -8,7 +8,7 @@
 		{
 			$this->conexion2 =  new Conexion2();
 		}
-        public function Descargo($id,$Ganancia,$fechaActual){
+        public function Descargo($id,$fechaActual,$Ganancia){
             $sqlGanancia="
             INSERT INTO saldoContrato (idContrato,fechaPago,montoPago,tipoPago)
             VALUES(:id, :fechaActual, :ganancia, 'BecaConvenio');
@@ -19,7 +19,9 @@
             $cmd->bindParam(':ganancia',$Ganancia);
             $cmd->execute();
             $SaldoUpdate = $cmd->fetch();  
+            //echo "datos insertados";
             return $SaldoUpdate;
+            
 
         }
     }

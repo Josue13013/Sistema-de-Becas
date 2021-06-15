@@ -47,8 +47,8 @@ if (isset($_SESSION['usuario'])){
         <td> <?php echo $lista['Estudiante']?></td>
         <td><?php echo $lista['Departamento']?></td>
         <td><?php echo $lista['Area']?></td>
-        <td><a href="ReporteMensual.php?idABI=<?php echo $lista['idABI']?>">Mensual</a></td>
-        <td><a href="EstadoCuenta.php?idEstudiante=<?php echo $lista['idEstudiante']?>">Ver</a></td>
+        <td><a href="ReporteMensual.php?ci=<?php echo $lista['ci']?>">Mensual</a></td>
+        <td><a href="IUEstadoFinanciero.php?ci=<?php echo $lista['ci']?>">Ver</a></td>
         </tr>
     <?php
     }

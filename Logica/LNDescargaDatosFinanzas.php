@@ -8,8 +8,8 @@ class LNDescargaFinanciero{
     {
         $this->objDescargaFinanciero =  new DescargaDatosFinanciero();
     }
-    public function Descargar($id,$Ganancia,$fechaActual){
-        return $this->objDescargaFinanciero->Descargo($id,$Ganancia,$fechaActual);
+    public function Descargar($id,$fechaActual,$Ganancia){
+        return $this->objDescargaFinanciero->Descargo($id,$fechaActual,$Ganancia);
     }
 }
 

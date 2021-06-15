@@ -46,7 +46,7 @@
         }//end function
         public function listarEstudiantesBecados(){
             $sqlEstudiantes="
-            SELECT CONCAT_WS(' ',e.apellidoPaterno,e.apellidoMaterno,e.primerNombre,e.segundoNombre)  as Estudiante, d.nombre Departamento, a.nombre Area, abi.idAsignacionBecaInstitucional idABI, e.idEstudiante 
+            SELECT CONCAT_WS(' ',e.apellidoPaterno,e.apellidoMaterno,e.primerNombre,e.segundoNombre)  as Estudiante, d.nombre Departamento, a.nombre Area, abi.idAsignacionBecaInstitucional idABI, e.ci ci
             FROM gestion g
             INNER JOIN solicitudBecaInstitucional sbi
             ON g.idGestion = sbi.idGestion
@@ -65,7 +65,7 @@
             $lista=$cmd->fetchAll();
             return $lista;
         }
-        public function detalleEstudiante($id){
+        public function detalleEstudiante($ci){
             $sqlDetalle="
             SELECT CONCAT_WS(' ',e.apellidoPaterno,e.apellidoMaterno,e.primerNombre,e.segundoNombre)  as Estudiante, d.nombre Departamento, a.nombre Area, 
             abi.idAsignacionBecaInstitucional idABI, g.nombre as gestion, CONCAT_WS(' ',p.apellidoPaterno,p.apellidoMaterno,p.primerNombre,p.segundoNombre)  as Jefe, g.nombre as gestion,
@@ -78,9 +78,9 @@
                     ON sbi.idPrecio=pre.idPrecio
                         INNER JOIN asignacionBecaInstitucional abi 
                         ON sbi.idSolicitudBecaInstitucional = abi.idSolicitudBecaInstitucional
-                    AND abi.idAsignacionBecaInstitucional=:id
                         INNER JOIN estudiante e
                         ON abi.idEstudiante = e.idEstudiante
+                        AND e.ci=:ci
                         INNER JOIN area a 
                         ON sbi.idArea = a.idArea 
                         INNER JOIN departamento d 
@@ -94,13 +94,13 @@
             
             ";
             $cmd = $this->conexion->prepare($sqlDetalle);
-            $cmd->bindParam(':id',$id);
+            $cmd->bindParam(':ci',$ci);
             $cmd->execute();
             $datosEstudiante=$cmd->fetch();
             return $datosEstudiante;
         }
 
-        public function mes($fechaInicio,$fechaFin,$idABI){
+        public function mes($fechaInicio,$fechaFin,$ci){
             $sqlMes="
             SELECT CONCAT_WS(' ',e.apellidoPaterno,e.apellidoMaterno,e.primerNombre,e.segundoNombre)  as Estudiante,
             d.nombre Departamento, a.nombre Area, res.fecha,res.horaInicio HoraEntrada, res.horaFin HoraSalida,
@@ -111,9 +111,9 @@
             AND g.activo=1
             INNER JOIN asignacionBecaInstitucional abi 
             ON sbi.idSolicitudBecaInstitucional = abi.idSolicitudBecaInstitucional
-            AND abi.idAsignacionBecaInstitucional=:idABI
             INNER JOIN estudiante e
             ON abi.idEstudiante = e.idEstudiante
+            AND e.ci=:ci
             INNER JOIN area a 
             ON sbi.idArea = a.idArea 
             INNER JOIN departamento d 
@@ -125,14 +125,14 @@
             $cmd = $this->conexion->prepare($sqlMes);
             $cmd->bindParam(':fechaInicio',$fechaInicio);
             $cmd->bindParam(':fechaFin',$fechaFin);
-            $cmd->bindParam(':idABI',$idABI);
+            $cmd->bindParam(':ci',$ci);
             $cmd->execute();
             $reporteMes=$cmd->fetchAll();
             return $reporteMes;
 
         }
 
-        public function dia($idABI,$fecha){
+        public function dia($ci,$fecha){
             $sqlDia="SELECT CONCAT_WS(' ',e.apellidoPaterno,e.apellidoMaterno,e.primerNombre,e.segundoNombre)  as Estudiante,
             d.nombre Departamento, a.nombre Area, res.fecha,res.horaInicio HoraEntrada, res.horaFin HoraSalida,
             res.totalHora HorasTrabajadas
@@ -142,9 +142,9 @@
             AND g.activo=1
             INNER JOIN asignacionBecaInstitucional abi 
             ON sbi.idSolicitudBecaInstitucional = abi.idSolicitudBecaInstitucional
-            AND abi.idAsignacionBecaInstitucional=:idABI
             INNER JOIN estudiante e
             ON abi.idEstudiante = e.idEstudiante
+            AND e.ci=:ci
             INNER JOIN area a 
             ON sbi.idArea = a.idArea 
             INNER JOIN departamento d 
@@ -154,14 +154,14 @@
             and res.fecha=:fecha;
             ";
             $cmd = $this->conexion->prepare($sqlDia);
-            $cmd->bindParam(':idABI',$idABI);
+            $cmd->bindParam(':ci',$ci);
             $cmd->bindParam(':fecha',$fecha);
             $cmd->execute();
             $reporteDia=$cmd->fetchAll();
             return $reporteDia;
 
         }
-        public function totalTime($fechaInicio,$fechaFin,$idABI){
+        public function totalTime($fechaInicio,$fechaFin,$ci){
             $sqltotal="
             SELECT CONCAT_WS(' ',e.apellidoPaterno,e.apellidoMaterno,e.primerNombre,e.segundoNombre)  as Estudiante,
             d.nombre Departamento, a.nombre Area, res.fecha,res.horaInicio HoraEntrada, res.horaFin HoraSalida,
@@ -172,9 +172,9 @@
             AND g.activo=1
             INNER JOIN asignacionBecaInstitucional abi 
             ON sbi.idSolicitudBecaInstitucional = abi.idSolicitudBecaInstitucional
-            AND abi.idAsignacionBecaInstitucional=:idABI
             INNER JOIN estudiante e
             ON abi.idEstudiante = e.idEstudiante
+            AND e.ci=:ci
             INNER JOIN area a 
             ON sbi.idArea = a.idArea 
             INNER JOIN departamento d 
@@ -186,7 +186,7 @@
             $cmd = $this->conexion->prepare($sqltotal);
             $cmd->bindParam(':fechaInicio',$fechaInicio);
             $cmd->bindParam(':fechaFin',$fechaFin);
-            $cmd->bindParam(':idABI',$idABI);
+            $cmd->bindParam(':ci',$ci);
             $cmd->execute();
             $reporteTotal=$cmd->fetchAll();
             return $reporteTotal;

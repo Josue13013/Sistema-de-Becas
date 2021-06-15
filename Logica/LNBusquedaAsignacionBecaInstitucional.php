@@ -14,14 +14,14 @@ class LNBusquedaAsignacionBecaInstitucional{
     public function listarEstudiantesBecados(){
         return $this->objBusquedaGestion->listarEstudiantesBecados();
     }
-    public function detalleEstudiante($id){
-        return $this->objBusquedaGestion->detalleEstudiante($id);
+    public function detalleEstudiante($ci){
+        return $this->objBusquedaGestion->detalleEstudiante($ci);
     }
-    public function mes($fechaInicio,$fechaFin,$idABI){
-        return $this->objBusquedaGestion->mes($fechaInicio,$fechaFin,$idABI);
+    public function mes($fechaInicio,$fechaFin,$ci){
+        return $this->objBusquedaGestion->mes($fechaInicio,$fechaFin,$ci);
     }
-    public function dia($idABI,$fecha){
-        return $this->objBusquedaGestion->dia($idABI,$fecha);
+    public function dia($ci,$fecha){
+        return $this->objBusquedaGestion->dia($ci,$fecha);
     }
     function fechaCastellano ($fecha) {
         $fecha = substr($fecha, 0, 10);
@@ -38,8 +38,8 @@ class LNBusquedaAsignacionBecaInstitucional{
         $fechita=$nombredia." ".$numeroDia." de ".$nombreMes." de ".$anio;
         return $fechita;
         }
-        public function totalTime($fechaInicio,$fechaFin,$idABI){
-            return $this->objBusquedaGestion->totalTime($fechaInicio,$fechaFin,$idABI);
+        public function totalTime($fechaInicio,$fechaFin,$ci){
+            return $this->objBusquedaGestion->totalTime($fechaInicio,$fechaFin,$ci);
         }
 }
 

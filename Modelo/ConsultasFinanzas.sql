@@ -12,7 +12,7 @@ ON co.idEstudiante=e.idEstudiante;
 
 
 --consulta para ver estado de cuentas de un determinado estudiante-----
-select CONCAT_WS(' ',e.apellidoPaterno,e.apellidoMaterno,e.primerNombre,e.segundoNombre)  as Estudiante, f.nombre facultad, c.nombre carrera, co.montoTotal CosteSemestre,  sc.montoPago pagado, sc.fechaPago fechaPagada, sc.tipoPago TipoPago
+select CONCAT_WS(' ',e.apellidoPaterno,e.apellidoMaterno,e.primerNombre,e.segundoNombre)  as Estudiante, f.nombre facultad, c.nombre carrera, co.montoTotal CosteSemestre,  sc.montoPago pagado, sc.fechaPago fechaPagada, sc.tipoPago TipoPago, co.idContrato idContrato
 from facultad f
 INNER JOIN carrera c
 ON f.idFacultad=c.idFacultad
@@ -22,7 +22,7 @@ INNER JOIN saldoContrato sc
 on co.idContrato=sc.idContrato
 INNER JOIN estudiante e
 ON co.idEstudiante=e.idEstudiante
-AND e.idEstudiante=1;
+AND e.idEstudiante=2;
 
 ----consulta auxiliar para ver estudiante y su carrera---
 select e.primerNombre nombre, car.nombre carrera

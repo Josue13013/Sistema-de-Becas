@@ -1,10 +1,10 @@
 <?php
 require_once('../Logica/LNBusquedaAsignacionBecaInstitucional.php');
-if(isset($_GET['idABI'])){
-$id=$_GET['idABI'];
+if(isset($_GET['ci'])){
+$ci=$_GET['ci'];
 //echo $id;
 $objLNBABI=new LNBusquedaAsignacionBecaInstitucional();
-$datosEstudiante=$objLNBABI->detalleEstudiante($id);
+$datosEstudiante=$objLNBABI->detalleEstudiante($ci);
 //print_r($datosEstudiante);
 //echo "hola ".$id;
 }
@@ -21,9 +21,7 @@ $datosEstudiante=$objLNBABI->detalleEstudiante($id);
 <body>
 
 
-<form action="../Vista/EstadoCuenta.php" name="oculto" method="POST">
-<input type="hidden" value="<?php echo $id;?>" name="id" > 
-<input type="submit" value="Ver Estado de Cuentas">
+
 
 
 <h1>Reporte Mensual</h1>
@@ -37,7 +35,7 @@ $datosEstudiante=$objLNBABI->detalleEstudiante($id);
 
 
 <form action="../Vista/TablareporteMensual.php" name="parametros" method="POST">
-<input type="hidden" value="<?php echo $id;?>" name="id" > 
+<input type="hidden" value="<?php echo $ci;?>" name="ci" > 
 <p>Reporte Mensual Inicio: </p><input type="Date" name="inicio">
 <p>Reporte Mensual Fin: </p><input type="Date" name="fin"><br><br>
 

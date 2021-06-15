@@ -10,7 +10,8 @@
 		}
         public function saldoEstudiante($id){
             $sqlDetalle="
-z            from facultad f
+            select CONCAT_WS(' ',e.apellidoPaterno,e.apellidoMaterno,e.primerNombre,e.segundoNombre)  as Estudiante, f.nombre facultad, c.nombre carrera, co.montoTotal CosteSemestre,  sc.montoPago pagado, sc.fechaPago fechaPagada, sc.tipoPago TipoPago, co.saldoTotal saldoTotal, e.ci ci
+            from facultad f
             INNER JOIN carrera c
             ON f.idFacultad=c.idFacultad
             INNER JOIN contrato co
@@ -19,7 +20,7 @@ z            from facultad f
             on co.idContrato=sc.idContrato
             INNER JOIN estudiante e
             ON co.idEstudiante=e.idEstudiante
-            AND e.idEstudiante=:id;
+            AND e.ci=:id;
             ";
             $cmd = $this->conexion2->prepare($sqlDetalle);
             $cmd->bindParam(':id',$id);
@@ -40,7 +41,7 @@ z            from facultad f
             on co.idContrato=sc.idContrato
             INNER JOIN estudiante e
             ON co.idEstudiante=e.idEstudiante
-            AND e.idEstudiante=:id;
+            AND e.ci=:id;
             ";
             $cmd = $this->conexion2->prepare($sqlDetalle);
             $cmd->bindParam(':id',$id);
@@ -49,9 +50,9 @@ z            from facultad f
             return $estudiante;
 
         }
-        public function detalleEstudiante3($id){
+        public function detalleEstudiante3($ci){
             $sqlDetalle="
-            select CONCAT_WS(' ',e.apellidoPaterno,e.apellidoMaterno,e.primerNombre,e.segundoNombre)  as Estudiante, f.nombre facultad, c.nombre carrera, co.montoTotal CosteSemestre,  SUM(sc.montoPago) pagado, sc.fechaPago fechaPagada, sc.tipoPago TipoPago
+            select CONCAT_WS(' ',e.apellidoPaterno,e.apellidoMaterno,e.primerNombre,e.segundoNombre)  as Estudiante, f.nombre facultad, c.nombre carrera, co.montoTotal CosteSemestre,  SUM(sc.montoPago) pagado, sc.fechaPago fechaPagada, sc.tipoPago TipoPago, co.idContrato idContrato
             from facultad f
             INNER JOIN carrera c
             ON f.idFacultad=c.idFacultad
@@ -61,10 +62,10 @@ z            from facultad f
             on co.idContrato=sc.idContrato
             INNER JOIN estudiante e
             ON co.idEstudiante=e.idEstudiante
-            AND e.idEstudiante=:id;
+            AND e.ci=:ci;
             ";
             $cmd = $this->conexion2->prepare($sqlDetalle);
-            $cmd->bindParam(':id',$id);
+            $cmd->bindParam(':ci',$ci);
             $cmd->execute();
             $estudiante = $cmd->fetch();  
             return $estudiante;
