@@ -1,0 +1,24 @@
+SELECT CONCAT_WS(' ',e.apellidoPaterno,e.apellidoMaterno,e.primerNombre,e.segundoNombre)  as Estudiante, d.nombre Departamento, a.nombre Area, 
+abi.idAsignacionBecaInstitucional idABI, g.nombre as gestion, CONCAT_WS(' ',p.apellidoPaterno,p.apellidoMaterno,p.primerNombre,p.segundoNombre)  as Jefe, g.nombre as gestion,
+r.nombre as rolPersonal, pre.precio as precio
+            FROM gestion g
+            INNER JOIN solicitudBecaInstitucional sbi
+            ON g.idGestion = sbi.idGestion
+            AND g.activo=1
+	    INNER JOIN precio pre
+	    ON sbi.idPrecio=pre.idPrecio
+            INNER JOIN asignacionBecaInstitucional abi 
+            ON sbi.idSolicitudBecaInstitucional = abi.idSolicitudBecaInstitucional
+	    AND abi.idAsignacionBecaInstitucional=1
+            INNER JOIN estudiante e
+            ON abi.idEstudiante = e.idEstudiante
+            INNER JOIN area a 
+            ON sbi.idArea = a.idArea 
+            INNER JOIN departamento d 
+            ON a.idDepartamento = d.idDepartamento
+	    INNER JOIN personalDepartamento pd
+	    ON d.idDepartamento=pd.idDepartamento
+	    INNER JOIN personal p
+	    ON pd.idPersonal=p.idPersonal
+	    INNER JOIN rol r
+	    ON p.idRol=r.idRol;
