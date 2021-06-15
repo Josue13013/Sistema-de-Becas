@@ -1,0 +1,9 @@
+1) corregir gestion (dropdown) o combobox, por defecto estar seleccionada la gestion activa
+2) link para ver horarios de trabajo del estudiante en reporte mensual
+3) corregir el nombre de reporte de becarios en la vista de finanzas personal, colocar como reportes
+4) añadir a la vista de tablareportemensual (ver horarios de trabajo)
+5) en reporte diario corregir fecha y mostrar el total de horas (entradas y salidas totales de ese dia)
+6) corregir tabla de iu estado finenciero fecha, pago parcial, tipo de pago(en ese orden)
+7) luego de descargar datos, enviar a estado de cuentas del mismo estudiante al que se le realizo el descargo
+8) crear campo de descargo en la tabla de registroentradasalida con 0= disponible para usar el descargo y 1= ya descargo
+9) como jefe de dapartamento inicia sesion y puede ver los ingresos de su estudiante(incluido el ultimo ingreso)
